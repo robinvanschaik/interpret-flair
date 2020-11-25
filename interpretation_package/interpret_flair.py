@@ -30,16 +30,20 @@ def interpret_sentence(flair_model_wrapper, lig, sentence, target_label, visuali
 
     tokenized_sentence = flair_sentence.to_tokenized_string()
 
+    tokenizer_max_length = flair_model_wrapper.tokenizer.model_max_length
+
     # This calculates the token input IDs tensor for the model.
     input_ids = flair_model_wrapper.tokenizer.encode(tokenized_sentence,
                                                      add_special_tokens=False,
-                                                     max_length=flair_model_wrapper.tokenizer.model_max_length,
+                                                     max_length=tokenizer_max_length,
                                                      truncation=True,
                                                      return_tensors="pt")
 
     # Create a baseline by creating a tensor of equal length
     # containing the padding token tensor id.
-    ref_base_line = torch.ones_like(input_ids)
+    pad_token_id = flair_model_wrapper.tokenizer.pad_token_id
+
+    ref_base_line = torch.full_like(input_ids, pad_token_id)
 
     # Convert back to tokens as the model requires.
     # As some words might get split up. e.g. Caroll to Carol l.
