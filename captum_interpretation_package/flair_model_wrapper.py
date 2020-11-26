@@ -29,6 +29,11 @@ class ModelWrapper(nn.Module):
 
         self.label_dictionary = self.flair_model.label_dictionary
         self.num_classes = len(self.flair_model.label_dictionary)
+
+        self.label_names = []
+        for i in range(len(self.label_dictionary)):
+                self.label_names.append(self.label_dictionary.get_item_for_index(i))
+
         self.embedding_length = self.flair_model.document_embeddings.embedding_length
 
         self.initial_cls_token = flair_model.document_embeddings.initial_cls_token

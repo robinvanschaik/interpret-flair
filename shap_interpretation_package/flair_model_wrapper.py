@@ -29,6 +29,11 @@ class ModelWrapper(nn.Module):
 
         self.label_dictionary = self.flair_model.label_dictionary
         self.num_classes = len(self.flair_model.label_dictionary)
+
+        self.label_names = []
+        for i in range(len(self.label_dictionary)):
+                self.label_names.append(self.label_dictionary.get_item_for_index(i))
+
         self.embedding_length = self.flair_model.document_embeddings.embedding_length
 
         self.initial_cls_token = flair_model.document_embeddings.initial_cls_token
@@ -62,8 +67,4 @@ class ModelWrapper(nn.Module):
         # It's better to attribute the logits to the inputs.
         label_scores = self.flair_model.decoder(output_embeddings)
 
-        # Captum expects [#examples, #classes] as size.
-        # We do to this so we can specify the target class with multiclass
-        # models.
-        label_scores_resized = torch.reshape(label_scores, (1, self.num_classes))
-        return label_scores_resized
+        return label_scores
