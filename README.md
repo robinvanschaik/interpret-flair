@@ -743,6 +743,8 @@ Check out this [discussion](https://github.com/flairNLP/flair/issues/1504) regar
 
 ### Authors
 
+[![DOI](https://zenodo.org/badge/314835538.svg)](https://zenodo.org/badge/latestdoi/314835538)
+
 * [Robin van Schaik](https://github.com/robinvanschaik)
 
 ### Acknowledgements
