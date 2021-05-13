@@ -14,6 +14,7 @@ The model has the following results:
 
 ```python
 import numpy as np
+import flair
 from flair.models import TextClassifier
 from flair.data import Sentence
 from interpretation_package.flair_model_wrapper import ModelWrapper
@@ -21,13 +22,17 @@ from interpretation_package.interpret_flair import interpret_sentence, visualize
 from captum.attr import LayerIntegratedGradients
 ```
 
+Define which device to use: 'cpu' or 'cuda'
 
 ```python
-model_path = "./model/output/best-model.pt"
+flair.device = 'cuda'
 ```
 
 We load the trained Flair classifier.
 
+```python
+model_path = "./model/output/best-model.pt"
+```
 
 ```python
 flair_model = TextClassifier.load(model_path)
