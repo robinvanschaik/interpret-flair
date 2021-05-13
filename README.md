@@ -14,6 +14,7 @@ The model has the following results:
 
 ```python
 import numpy as np
+import flair
 from flair.models import TextClassifier
 from flair.data import Sentence
 from interpretation_package.flair_model_wrapper import ModelWrapper
