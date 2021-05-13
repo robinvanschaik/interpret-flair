@@ -39,6 +39,9 @@ def interpret_sentence(flair_model_wrapper, lig, sentence, target_label, visuali
                                                      truncation=True,
                                                      return_tensors="pt")
 
+    # this makes sure that the input IDs tensor is on the correct device (cuda or cpu)
+    input_ids = input_ids.to(flair_model_wrapper.device)
+
     # Create a baseline by creating a tensor of equal length
     # containing the padding token tensor id.
     pad_token_id = flair_model_wrapper.tokenizer.pad_token_id
